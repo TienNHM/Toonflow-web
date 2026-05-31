@@ -329,7 +329,7 @@
           <span>{{ $t("settings.vendor.codeEditorInfo") }}</span>
         </div>
         <div class="editorActions">
-          <t-button variant="text" size="small" @click="vendorCode = VENDOR_CODE_TEMPLATE">
+          <t-button variant="text" size="small" @click="vendorCode = getVendorCodeTemplate(locale)">
             <template #icon><t-icon name="rollback" /></template>
             {{ $t("settings.vendor.reset") }}
           </t-button>
@@ -352,7 +352,10 @@ import { MdPreview } from "md-editor-v3";
 import { CodeEditor } from "monaco-editor-vue3";
 import { DialogPlugin } from "tdesign-vue-next";
 import axios from "@/utils/axios";
-import VENDOR_CODE_TEMPLATE from "@/lib/vendorTemplate.ts?raw";
+import { getVendorCodeTemplate } from "@/utils/getVendorCodeTemplate";
+import { useI18n } from "vue-i18n";
+
+const { locale } = useI18n();
 import { providersLogo, modelProviderRules } from "@/utils/providersLogo";
 import { resolveMdEditorTheme } from "@/utils/mdEditorTheme";
 import type { UploadFile } from "tdesign-vue-next";
@@ -541,7 +544,7 @@ const optionalInputs = computed(() => currentVendor.value?.inputs?.filter((input
 // ── 供应商弹窗 ──
 const vendorDialogVisible = ref(false);
 const codeDialogVisible = ref(false);
-const vendorCode = ref(VENDOR_CODE_TEMPLATE);
+const vendorCode = ref(getVendorCodeTemplate(locale.value));
 const fileInputRef = ref<HTMLInputElement | null>(null);
 const updating = ref(false);
 const autoUpdating = ref(false);
@@ -664,7 +667,7 @@ const id = ref<string>();
 function handleAddVendor() {
   addMode.value = "importAdd";
   id.value = undefined;
-  vendorCode.value = VENDOR_CODE_TEMPLATE;
+  vendorCode.value = getVendorCodeTemplate(locale.value);
   vendorDialogVisible.value = true;
   codeDialogVisible.value = false;
 }

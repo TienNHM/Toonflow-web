@@ -1996,5 +1996,7 @@
   "settings.prompt.types.videoPromptGeneration.name": "Tạo prompt video",
   "settings.prompt.types.videoPromptGeneration.summary": "Sinh prompt video theo model và thông tin storyboard.",
   "settings.prompt.types.audioBindPrompt.name": "Gán giọng TTS",
-  "settings.prompt.types.audioBindPrompt.summary": "Chọn giọng phù hợp nhất từ danh sách audio theo mô tả nhân vật."
+  "settings.prompt.types.audioBindPrompt.summary": "Chọn giọng phù hợp nhất từ danh sách audio theo mô tả nhân vật.",
+  "agent.socket.role.scriptCoordinator": "Điều phối",
+  "agent.socket.role.productionPlanner": "Lập kế hoạch video"
 }

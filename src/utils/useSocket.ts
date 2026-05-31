@@ -34,7 +34,11 @@ export function useSocket<T extends SocketEventMap = SocketEventMap>(url = "http
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
       timeout: 10000,
-      auth: { token: localStorage.getItem("token"), ...authOptions },
+      auth: {
+        token: localStorage.getItem("token"),
+        locale: localStorage.getItem("locale") || (typeof navigator !== "undefined" && navigator.language.toLowerCase().startsWith("vi") ? "vi-VN" : "zh-CN"),
+        ...authOptions,
+      },
     });
 
     socket.on("connect", () => (connected.value = true));

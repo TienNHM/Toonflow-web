@@ -1981,5 +1981,7 @@
   "settings.prompt.types.videoPromptGeneration.name": "视频提示词生成",
   "settings.prompt.types.videoPromptGeneration.summary": "按视频模型与分镜信息生成对应格式的视频 prompt。",
   "settings.prompt.types.audioBindPrompt.name": "音色绑定",
-  "settings.prompt.types.audioBindPrompt.summary": "根据角色信息从候选音频中匹配最合适音色。"
+  "settings.prompt.types.audioBindPrompt.summary": "根据角色信息从候选音频中匹配最合适音色。",
+  "agent.socket.role.scriptCoordinator": "统筹",
+  "agent.socket.role.productionPlanner": "视频策划"
 }

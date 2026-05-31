@@ -16,7 +16,7 @@
           v-for="message in messages"
           :key="message.id"
           :message="message"
-          :name="(message as any).name"
+          :name="resolveChatAgentName((message as any).name)"
           :placement="message.role === 'user' ? 'right' : 'left'"
           :variant="message.role === 'user' ? 'base' : 'outline'"
           :handleActions="message.role === 'user' ? {} : handleActions"
@@ -96,6 +96,7 @@ import { useMousePressed, useMouse } from "@vueuse/core";
 import _ from "lodash";
 import axios from "@/utils/axios";
 import productionAgentStore from "@/stores/productionAgent";
+import { resolveChatAgentName } from "@/utils/resolveChatAgentName";
 import projectStore from "@/stores/project";
 const { project } = storeToRefs(projectStore());
 const { connected, messages, status, episodesId, loadingHistory, thinkLevel } = storeToRefs(productionAgentStore());

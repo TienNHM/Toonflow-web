@@ -8,7 +8,7 @@
               v-for="message in messages"
               :key="message.id"
               :message="message"
-              :name="(message as any).name"
+              :name="resolveChatAgentName((message as any).name)"
               :placement="message.role === 'user' ? 'right' : 'left'"
               :variant="message.role === 'user' ? 'base' : 'outline'"
               :handleActions="message.role === 'user' ? {} : handleActions"
@@ -225,6 +225,7 @@ const thinkLevelOptions = [
   { label: $t("workbench.scriptAgent.thinkLevel.extreme"), value: 3 },
 ];
 import productionAgentStore from "@/stores/productionAgent";
+import { resolveChatAgentName } from "@/utils/resolveChatAgentName";
 const currentTable = ref(1);
 const inputValue = ref("");
 const toolbars: ToolbarNames[] = [

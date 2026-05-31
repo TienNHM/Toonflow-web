@@ -203,7 +203,7 @@ function onLogoClick() {
     if (logoClickTimer) clearTimeout(logoClickTimer);
     if (showCustomUrl.value) return;
     showCustomUrl.value = true;
-    MessagePlugin.info("已开启自定义更新地址");
+    MessagePlugin.info(t("settings.about.customUrlEnabled"));
   }
 }
 
@@ -367,11 +367,15 @@ async function doConfirmUpdate() {
 }
 
 function confirmUpdate() {
-  const reinstallWarning = updateInfo.value.reinstall ? "\n\n检测到该版本需要重新安装更新，安装过程中可能会替换现有安装，请先保存当前工作。" : "";
+  const reinstallWarning = updateInfo.value.reinstall ? t("settings.about.reinstallWarning") : "";
 
   const dialog = DialogPlugin.confirm({
-    header: "确认更新",
-    body: `将通过 ${getUpdateSourceLabel(updateSource.value)} 更新到 v${updateInfo.value.latestVersion}，确认继续吗？${reinstallWarning}`,
+    header: t("settings.about.confirmUpdateHeader"),
+    body: t("settings.about.confirmUpdateBody", {
+      source: getUpdateSourceLabel(updateSource.value),
+      version: updateInfo.value.latestVersion,
+      extra: reinstallWarning,
+    }),
     confirmBtn: {
       content: t("settings.about.confirmUpdate"),
       theme: "primary",

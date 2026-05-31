@@ -4,7 +4,7 @@
       <div class="trackMenu f ac jb">
         <div class="left f ac">
           <t-checkbox v-model="checkAll" @change="handleCheckAll">{{ $t("workbench.generate.selectAll") }}</t-checkbox>
-          <span class="selectedCount" v-if="checkedTrackIds.length">{{ $t("workbench.generate.selected") }} {{ checkedTrackIds.length }} 段</span>
+          <span class="selectedCount" v-if="checkedTrackIds.length">{{ $t("workbench.generate.selectedSegments", { count: checkedTrackIds.length }) }}</span>
         </div>
         <div class="right f ac">
           <t-button size="small" variant="outline" @click="batchDownloadVideo">{{ $t("workbench.generate.batchDownloadVideo") }}</t-button>
@@ -221,7 +221,10 @@ async function batchDownloadVideo(): Promise<void> {
     .map((track) => {
       const video = track.videoList.find((v) => v.id === track.selectVideoId);
       if (!video?.src) return null;
-      const filename = `分镜${track.id}.${getFileExtension(video.src)}`;
+      const filename = $t("workbench.generate.downloadFileName", {
+        index: track.id,
+        ext: getFileExtension(video.src),
+      });
       return fetch(video.src)
         .then((res) => res.blob())
         .then((blob) => zip.file(filename, blob))
@@ -233,7 +236,7 @@ async function batchDownloadVideo(): Promise<void> {
   const url = URL.createObjectURL(zipBlob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `视频批量下载_${Date.now()}.zip`;
+  a.download = $t("workbench.generate.downloadZipName", { time: Date.now() });
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -268,13 +271,18 @@ function batchGenText() {
         if (targetTrack) targetTrack.prompt = data;
       })
       .catch((e) => {
-        window.$message.error(`第${index + 1}段 提示词生成失败,${(e as Error)?.message ?? "提示词生成失败"}`);
+        window.$message.error(
+          $t("workbench.generate.promptGenSegmentFailed", {
+            index: index + 1,
+            error: (e as Error)?.message ?? $t("workbench.generate.promptGenFailed"),
+          }),
+        );
       })
       .finally(() => {
         genTextLoadingMap.value[trackId] = false;
       });
   });
-  window.$message.success("开始生成提示词");
+  window.$message.success($t("workbench.generate.promptGenStarted"));
   generateTextLoad.value = false;
   checkedTrackIds.value = [];
   checkAll.value = false;

@@ -267,7 +267,7 @@ const styleMaxSize = computed(() => {
 });
 const generateLoading = ref(false);
 async function batchGenerateImage() {
-  if (!selectedIds.value.length) return window.$message.warning("请先选择分镜面板");
+  if (!selectedIds.value.length) return window.$message.warning($t("workbench.production.node.storyboard.pleaseSelectPanel"));
   generateLoading.value = true;
   try {
     await productionAgentStore().batchGenerateStoryboard(selectedIds.value, true);

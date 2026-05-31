@@ -14,6 +14,11 @@ instance.interceptors.request.use(function (config) {
   if (token) {
     config.headers.Authorization = token;
   }
+  const locale = localStorage.getItem("locale") || "zh-CN";
+  config.headers["x-locale"] = locale;
+  if (config.data && typeof config.data === "object" && !(config.data instanceof FormData)) {
+    config.data = { ...config.data, locale };
+  }
   return config;
 });
 

@@ -19,7 +19,7 @@
         </template>
         <template v-else>
           <t-tooltip theme="primary" :content="item?.prompt ? $t('workbench.generate.audioContentPrefix') + item.prompt : ''">
-            <span style="font-size: 20px">文</span>
+            <span style="font-size: 20px">{{ $t("workbench.generate.textRefShort") }}</span>
           </t-tooltip>
         </template>
         <div class="imageToolsWrap" v-if="item.sources == 'storyboard' && item.index != null">
@@ -52,7 +52,7 @@
           </template>
           <template v-else>
             <t-tooltip theme="primary" :content="imageList?.[index]?.prompt || ''">
-              <span style="font-size: 20px">文</span>
+              <span style="font-size: 20px">{{ $t("workbench.generate.textRefShort") }}</span>
             </t-tooltip>
           </template>
           <div class="imageToolsWrap" v-if="imageList?.[index]?.sources == 'storyboard' && imageList?.[index]?.index != null">

@@ -150,15 +150,15 @@ function modeChange(newVal: string) {
 }
 const modeList = computed(() => {
   const modeLabelMap: Record<string, string> = {
-    singleImage: "单图",
-    startEndRequired: "首尾帧",
-    endFrameOptional: "尾帧可选",
-    startFrameOptional: "首帧可选",
-    text: "文本生视频",
-    videoReference: "视频",
-    imageReference: "图片",
-    audioReference: "音频",
-    textReference: "文本",
+    singleImage: $t("settings.modelMap.mode.singleImage"),
+    startEndRequired: $t("settings.modelMap.mode.startEndRequired"),
+    endFrameOptional: $t("settings.modelMap.mode.endFrameOptional"),
+    startFrameOptional: $t("settings.modelMap.mode.startFrameOptional"),
+    text: $t("settings.modelMap.mode.text"),
+    videoReference: $t("settings.modelMap.type.video"),
+    imageReference: $t("settings.modelMap.type.image"),
+    audioReference: $t("settings.modelMap.mode.audioReference"),
+    textReference: $t("settings.modelMap.type.text"),
   };
   function parseRefLabel(m: string): string {
     const match = m.match(/^(videoReference|imageReference|audioReference|textReference):(\d+)$/);
@@ -168,10 +168,11 @@ const modeList = computed(() => {
     }
     return modeLabelMap[m] || m;
   }
+  const refSuffix = $t("workbench.generate.referenceSuffix");
   return modeOptions.value.mode
     ? modeOptions.value.mode.map((mode) =>
         Array.isArray(mode)
-          ? { value: JSON.stringify(mode), label: mode.map((m) => parseRefLabel(m)).join(" + ") + "参考" }
+          ? { value: JSON.stringify(mode), label: mode.map((m) => parseRefLabel(m)).join(" + ") + refSuffix }
           : { value: mode, label: modeLabelMap[mode] || mode },
       )
     : [];

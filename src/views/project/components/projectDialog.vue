@@ -291,6 +291,8 @@ import modelSelect from "@/components/modelSelect.vue";
 import type { TabValue } from "tdesign-vue-next";
 import { DialogPlugin } from "tdesign-vue-next";
 
+const { t } = useI18n();
+
 const addProjectShow = defineModel<boolean>();
 const props = defineProps<{
   projectData?: ProjectData | null;
@@ -366,18 +368,18 @@ function handlePreview(src: string | undefined) {
 }
 
 const DEFAULT_TAB_DATA: () => Data[] = () => [
-  { label: "README", value: "README", data: "" },
-  { label: "前缀", value: "prefix", data: "" },
-  { label: "角色", value: "art_character", data: "" },
-  { label: "角色衍生", value: "art_character_derivative", data: "" },
-  { label: "道具", value: "art_prop", data: "" },
-  { label: "道具衍生", value: "art_prop_derivative", data: "" },
-  { label: "场景", value: "art_scene", data: "" },
-  { label: "场景衍生", value: "art_scene_derivative", data: "" },
-  { label: "分镜", value: "director_storyboard", data: "" },
-  { label: "分镜视频", value: "art_storyboard_video", data: "" },
-  { label: "技法-导演规划", value: "director_planning_style", data: "" },
-  { label: "技法-分镜表设计", value: "director_storyboard_table_style", data: "" },
+  { label: t("workbench.project.promptTab.readme"), value: "README", data: "" },
+  { label: t("workbench.project.promptTab.prefix"), value: "prefix", data: "" },
+  { label: t("workbench.project.promptTab.character"), value: "art_character", data: "" },
+  { label: t("workbench.project.promptTab.characterDerivative"), value: "art_character_derivative", data: "" },
+  { label: t("workbench.project.promptTab.prop"), value: "art_prop", data: "" },
+  { label: t("workbench.project.promptTab.propDerivative"), value: "art_prop_derivative", data: "" },
+  { label: t("workbench.project.promptTab.scene"), value: "art_scene", data: "" },
+  { label: t("workbench.project.promptTab.sceneDerivative"), value: "art_scene_derivative", data: "" },
+  { label: t("workbench.project.promptTab.storyboard"), value: "director_storyboard", data: "" },
+  { label: t("workbench.project.promptTab.storyboardVideo"), value: "art_storyboard_video", data: "" },
+  { label: t("workbench.project.promptTab.directorPlanning"), value: "director_planning_style", data: "" },
+  { label: t("workbench.project.promptTab.storyboardTableStyle"), value: "director_storyboard_table_style", data: "" },
 ];
 
 const isEdit = computed(() => !!props.projectData);

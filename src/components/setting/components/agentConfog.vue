@@ -33,9 +33,9 @@
           <div class="headerLeft">
             <t-avatar v-if="getDisplayLogo(item)" :image="getDisplayLogo(item)!" shape="round" />
             <t-avatar v-else shape="round" class="fallbackAvatar">
-              {{ getFallbackText(item.name) }}
+              {{ getFallbackText(agentDeployName(item.key, item.name)) }}
             </t-avatar>
-            <span class="skillName">{{ item.name }}</span>
+            <span class="skillName">{{ agentDeployName(item.key, item.name) }}</span>
           </div>
           <t-tag v-if="item.model && !item.disabled" theme="primary" variant="light" size="small">{{ item.model }}</t-tag>
           <t-tag v-else-if="item.disabled" variant="light" size="small">{{ $t("settings.agent.notOpen") }}</t-tag>
@@ -43,7 +43,7 @@
             {{ $t("settings.agent.notConfigured") }}
           </t-tag>
         </div>
-        <div class="skillCardBody">{{ item.desc }}</div>
+        <div class="skillCardBody">{{ agentDeployDesc(item.key, item.desc) }}</div>
       </t-card>
     </div>
 
@@ -53,10 +53,10 @@
           <div class="headerLeft">
             <t-avatar v-if="getDisplayLogo(item)" :image="getDisplayLogo(item)!" shape="round" />
             <t-avatar v-else shape="round" class="fallbackAvatar">
-              {{ getFallbackText(item.name) }}
+              {{ getFallbackText(agentDeployName(item.key, item.name)) }}
             </t-avatar>
             <div>
-              <div class="skillName">{{ item.name }}</div>
+              <div class="skillName">{{ agentDeployName(item.key, item.name) }}</div>
             </div>
           </div>
           <t-tag v-if="item.model && !item.disabled" theme="primary" variant="light" size="small">{{ item.model }}</t-tag>
@@ -66,7 +66,7 @@
           </t-tag>
         </div>
         <div class="skillCardBody jb">
-          <div>{{ item.desc }}</div>
+          <div>{{ agentDeployDesc(item.key, item.desc) }}</div>
           <div>
             <t-tag theme="primary" variant="light" size="small" style="margin-left: 5px">
               {{ $t("settings.agent.temperature") }}：{{ item.temperature }}
@@ -82,7 +82,7 @@
     <!-- 模型配置弹窗 -->
     <t-dialog
       v-model:visible="modelDataShow"
-      :header="currentItem?.name + ' ' + $t('settings.agent.modelConfig')"
+      :header="(currentItem ? agentDeployName(currentItem.key, currentItem.name) : '') + ' ' + $t('settings.agent.modelConfig')"
       width="480px"
       :on-confirm="confirmConfig"
       :confirm-btn="$t('settings.agent.confirm')"
@@ -92,10 +92,10 @@
           <t-form-item :label="$t('settings.agent.selectModel')">
             <modelSelect v-model="selectValue" v-model:label="selectLabel" type="text" />
           </t-form-item>
-          <t-form-item :label="$t('settings.agent.temperature')" v-if="type == '高级'">
+          <t-form-item :label="$t('settings.agent.temperature')" v-if="type === 'advanced'">
             <t-input-number v-model="currentItem.temperature" style="width: 100%" />
           </t-form-item>
-          <t-form-item :label="$t('settings.agent.maxOutputTokens')" v-if="type == '高级'">
+          <t-form-item :label="$t('settings.agent.maxOutputTokens')" v-if="type === 'advanced'">
             <div class="maxTokenRow">
               <t-radio-group v-model="maxTokenMode" variant="default-filled" size="small">
                 <t-radio-button value="auto">{{ $t("settings.agent.auto") }}</t-radio-button>
@@ -118,6 +118,7 @@
 
 <script setup lang="ts">
 import modelSelect from "@/components/modelSelect.vue";
+import { agentDeployName, agentDeployDesc } from "@/utils/resolveDeployLocale";
 import { providersLogo, modelProviderRules } from "@/utils/providersLogo";
 import axios from "@/utils/axios";
 import settingStore from "@/stores/setting";
@@ -125,6 +126,7 @@ const { isElectron } = storeToRefs(settingStore());
 
 interface ModelType {
   id: number;
+  key?: string;
   model: string;
   modelName: string;
   vendorId: number | null;

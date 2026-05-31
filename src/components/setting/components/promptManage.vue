@@ -4,10 +4,10 @@
       <t-card bordered>
         <div class="data">
           <div class="jb">
-            <div class="name">{{ value.name }}</div>
+            <div class="name">{{ promptTypeName(value.type, value.name) }}</div>
             <div class="type">{{ value.type }}</div>
           </div>
-          <div class="data">{{ value.data }}</div>
+          <div class="data">{{ promptTypeSummary(value.type, value.data) }}</div>
         </div>
       </t-card>
     </div>
@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import axios from "@/utils/axios";
+import { promptTypeName, promptTypeSummary } from "@/utils/resolveDeployLocale";
 import { MdEditor } from "md-editor-v3";
 import type { ToolbarNames } from "md-editor-v3";
 import settingStore from "@/stores/setting";

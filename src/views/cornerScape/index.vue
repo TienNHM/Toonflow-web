@@ -426,7 +426,7 @@ async function cancelGenerationFn(item: DataItem) {
         });
         window.$message.success($t("workbench.cornerScape.cancelGeneration") + " " + item.name);
       } catch (e: any) {
-        window.$message.error(e.message ?? $t("workbench.cornerScape.cancelGeneration") + "失败");
+        window.$message.error(e.message ?? $t("workbench.generate.cancelFailed"));
       } finally {
         getFilteredData();
         dialog.destroy();

@@ -339,7 +339,7 @@ async function genText() {
     });
     changeTrack.prompt = data;
   } catch (e) {
-    window.$message.error((e as Error)?.message ?? "提示词生成失败");
+    window.$message.error((e as Error)?.message ?? $t("workbench.generate.promptGenFailedShort"));
   } finally {
     genTextLoadingMap.value[currentTrackId] = false;
   }
@@ -434,7 +434,7 @@ async function generateVideo() {
           src: "",
         });
       } catch (e) {
-        window.$message.error((e as any)?.message ?? "视频发起生成请求失败");
+        window.$message.error((e as any)?.message ?? $t("workbench.generate.videoRequestFailed"));
       } finally {
       }
     },

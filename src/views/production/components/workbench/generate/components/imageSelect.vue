@@ -103,7 +103,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 import "@/views/production/components/workbench/type/type";
 import assetsCheck, { type AssetType, type ClipMediaType } from "@/utils/assetsCheck";
 import axios from "@/utils/axios";
@@ -128,8 +131,14 @@ const buildLabel = computed(() => {
   const startOptional = props.mode === "startFrameOptional";
   const endOptional = props.mode === "endFrameOptional";
   return [
-    { label: startOptional ? "首帧(可选)" : "首帧", value: "start" },
-    { label: endOptional ? "尾帧(可选)" : "尾帧", value: "end" },
+    {
+      label: startOptional ? t("workbench.generate.startFrameOptional") : t("workbench.generate.startFrame"),
+      value: "start",
+    },
+    {
+      label: endOptional ? t("workbench.generate.endFrameOptional") : t("workbench.generate.endFrame"),
+      value: "end",
+    },
   ];
 });
 

@@ -187,7 +187,7 @@ function confirmDeleteTrack(index: number) {
         window.$message.success($t("workbench.generate.delSuccess"));
         emit("getData");
       } catch (e: any) {
-        window.$message.error(e.message ?? $t("workbench.cornerScape.cancelGeneration") + "失败");
+        window.$message.error(e.message ?? $t("workbench.generate.cancelFailed"));
       } finally {
         dialog.destroy();
       }

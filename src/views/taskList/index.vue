@@ -1,38 +1,38 @@
 <template>
   <div class="taskList">
     <div class="header">
-      <h2 class="title">我的任务</h2>
+      <h2 class="title">{{ $t("workbench.taskList.title") }}</h2>
     </div>
     <div class="search f">
       <div>
-        <t-select label="任务大类：" v-model="taskClass" :options="taskCategories" />
+        <t-select :label="$t('workbench.taskList.categoryLabel')" v-model="taskClass" :options="taskCategories" />
       </div>
       <div style="margin-left: 20px">
-        <t-select label="状态：" v-model="state">
-          <t-option key="1" label="进行中" value="1" />
-          <t-option key="2" label="已完成" value="2" />
+        <t-select :label="$t('workbench.taskList.stateLabel')" v-model="state">
+          <t-option key="1" :label="$t('workbench.taskList.running')" value="1" />
+          <t-option key="2" :label="$t('workbench.taskList.completed')" value="2" />
         </t-select>
       </div>
-      <t-button style="margin-left: 10px">查询</t-button>
+      <t-button style="margin-left: 10px">{{ $t("workbench.taskList.search") }}</t-button>
     </div>
     <div class="content">
       <vxe-table ref="tableRef" :data="taskItem">
-        <vxe-column title="任务大类" field="taskClass" width="200" show-overflow="title"></vxe-column>
-        <vxe-column title="关联对象" field="relatedObjects" width="200" show-overflow="title"></vxe-column>
-        <vxe-column title="模型" field="model" width="200" show-overflow="title"></vxe-column>
-        <vxe-column title="描述" field="describe" show-header-overflow show-overflow="title" show-footer-overflow></vxe-column>
-        <vxe-column title="状态" field="state" width="150">
+        <vxe-column :title="$t('workbench.taskList.col.category')" field="taskClass" width="200" show-overflow="title"></vxe-column>
+        <vxe-column :title="$t('workbench.taskList.col.related')" field="relatedObjects" width="200" show-overflow="title"></vxe-column>
+        <vxe-column :title="$t('workbench.taskList.col.model')" field="model" width="200" show-overflow="title"></vxe-column>
+        <vxe-column :title="$t('workbench.taskList.col.describe')" field="describe" show-header-overflow show-overflow="title" show-footer-overflow></vxe-column>
+        <vxe-column :title="$t('workbench.taskList.col.state')" field="state" width="150">
           <template #default="{ row }">
             <span
               :style="{
-                color: row.state === '进行中' ? '#1890ff' : '#52c41a',
+                color: row.state === runningLabel ? '#1890ff' : '#52c41a',
                 fontWeight: 'bold',
               }">
-              {{ row.state }}
+              {{ displayState(row.state) }}
             </span>
           </template>
         </vxe-column>
-        <vxe-column title="时间" field="startTime" width="150">
+        <vxe-column :title="$t('workbench.taskList.col.time')" field="startTime" width="150">
           <template #default="{ row }">
             {{ dayjs(row.startTime).format("YYYY-MM-DD HH:mm:ss") }}
           </template>
@@ -53,13 +53,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useI18n } from "vue-i18n";
 import store from "@/stores";
 import axios from "@/utils/axios";
 import dayjs from "dayjs";
 import taskDetails from "./components/taskDetails.vue";
 import type { PageInfo } from "tdesign-vue-next";
+
+const { t } = useI18n();
 const { projectId } = storeToRefs(store());
+const runningLabel = computed(() => t("workbench.taskList.running"));
+const completedLabel = computed(() => t("workbench.taskList.completed"));
+
+function displayState(state: string) {
+  if (state === "进行中") return runningLabel.value;
+  if (state === "已完成") return completedLabel.value;
+  return state;
+}
+
 interface taskData {
   id: number;
   taskClass: string;
@@ -107,10 +119,10 @@ function getTaskCategories() {
         label: item.taskClass,
         value: item.taskClass,
       }));
-      taskCategories.value.unshift({ label: "全部", value: "" });
+      taskCategories.value.unshift({ label: t("workbench.task.stateAll"), value: "" });
     })
     .catch(() => {
-      window.$message.error("获取任务大类失败");
+      window.$message.error(t("workbench.taskList.msg.fetchCategoriesFailed"));
     });
 }
 //获取任务列表
@@ -128,7 +140,7 @@ function getTaskList() {
       pageValue.value.total = data.total;
     })
     .catch(() => {
-      window.$message.error("获取任务列表失败");
+      window.$message.error(t("workbench.taskList.msg.fetchListFailed"));
     });
 }
 </script>

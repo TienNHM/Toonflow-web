@@ -107,7 +107,12 @@ async function getPort() {
 
 const tdesignLocaleMap: Record<string, object> = {
   "zh-CN": zhConfig,
+  "zh-TW": zhConfig,
   en: enConfig,
+  "vi-VN": enConfig,
+  "th-TH": enConfig,
+  "ja-JP": enConfig,
+  "ru-RU": enConfig,
 };
 
 const customConfig: GlobalConfigProvider = {

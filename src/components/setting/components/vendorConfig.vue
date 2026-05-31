@@ -51,7 +51,12 @@
                 <span class="requiredText">{{ $t("settings.vendor.required") }}</span>
               </span>
             </template>
-            <t-input v-model="currentVendor.inputValues[input.key]" :type="input.type" clearable @blur="onBlurFn">
+            <t-input
+              v-model="currentVendor.inputValues[input.key]"
+              :type="input.type"
+              :placeholder="getInputPlaceholder(input) || $t('settings.vendor.inputPlaceholder')"
+              clearable
+              @blur="onBlurFn">
               <template #prefix-icon>
                 <t-icon :name="getInputIcon(input.type)" />
               </template>
@@ -65,7 +70,12 @@
             <t-collapse>
               <t-collapse-panel value="optional-inputs" :header="$t('settings.vendor.optionalSection')">
                 <t-form-item v-for="input in optionalInputs" :key="input.key" :name="input.key" :label="input.label">
-                  <t-input v-model="currentVendor.inputValues[input.key]" :type="input.type" clearable @blur="onBlurFn">
+                  <t-input
+                    v-model="currentVendor.inputValues[input.key]"
+                    :type="input.type"
+                    :placeholder="getInputPlaceholder(input) || $t('settings.vendor.inputPlaceholder')"
+                    clearable
+                    @blur="onBlurFn">
                     <template #prefix-icon>
                       <t-icon :name="getInputIcon(input.type)" />
                     </template>
@@ -270,13 +280,13 @@
       :maskClosable="false">
       <div class="data">
         <t-radio-group variant="default-filled" v-model="addMode">
-          <t-radio-button value="importAdd">通过文件导入</t-radio-button>
-          <t-radio-button value="linkAdd">通过链接添加</t-radio-button>
-          <t-radio-button value="codeAdd">通过代码添加</t-radio-button>
+          <t-radio-button value="importAdd">{{ $t("settings.vendor.importByFile") }}</t-radio-button>
+          <t-radio-button value="linkAdd">{{ $t("settings.vendor.importByLink") }}</t-radio-button>
+          <t-radio-button value="codeAdd">{{ $t("settings.vendor.importByCode") }}</t-radio-button>
         </t-radio-group>
         <div class="linkAdd" v-if="addMode == 'linkAdd'">
           <t-alert theme="warning" style="margin-bottom: 20px">
-            请填写 TypeScript 代码文件的链接（.ts 文件），不要填 API 地址或其他无关链接。 确认后 Toonflow 会自动加载该代码，请确保链接来源可信。
+            {{ $t("settings.vendor.linkImportHint") }}
           </t-alert>
           <t-input v-model="link" :placeholder="$t('settings.vendor.linkAddPlaceholder')"></t-input>
           <div style="margin-top: 10px; text-align: right; width: 100%">
@@ -350,6 +360,8 @@ import settingStore from "@/stores/setting";
 import TextModelTest from "./vendorTest/TextModelTest.vue";
 import ImageModelTest from "./vendorTest/ImageModelTest.vue";
 import VideoModelTest from "./vendorTest/VideoModelTest.vue";
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
 const { themeSetting } = storeToRefs(settingStore());
 
 // ── 类型 ──
@@ -493,7 +505,7 @@ const loading = ref(false);
 async function getVendorList() {
   loading.value = true;
   try {
-    const res = await axios.post("/setting/vendorConfig/getVendorList");
+    const res = await axios.post("/setting/vendorConfig/getVendorList", { locale: locale.value });
     vendorList.value = res.data.map((item: any) => {
       return {
         ...item,
@@ -1120,8 +1132,8 @@ function linkRead() {
               if (data.includes("<html>")) {
                 alertBox = DialogPlugin.alert({
                   theme: "danger",
-                  header: "链接返回了一个网页，添加供应商需要返回TS代码，请确认链接是否正确",
-                  body: "请勿输入中转站地址，如需使用中转站请修改OpenAI标准接口的baseUrl使用中转站地址",
+                  header: $t("settings.vendor.msg.linkReturnedWebpage"),
+                  body: $t("settings.vendor.msg.linkReturnedWebpageBody"),
                   onConfirm: ({ e }) => {
                     alertBox.hide();
                   },
@@ -1129,7 +1141,7 @@ function linkRead() {
               } else {
                 DialogPlugin.alert({
                   theme: "danger",
-                  header: "链接返回的内容不正确，添加供应商需要返回TS代码，请确认链接是否正确",
+                  header: $t("settings.vendor.msg.linkInvalidContent"),
                   onConfirm: ({ e }) => {
                     alertBox.hide();
                   },

@@ -94,8 +94,10 @@ const modelParmas = defineModel<ModelSetting>({
   },
 });
 const emit = defineEmits(["modeChange"]);
-function handleBeforeChange(newVal: string) {
-  emit("modeChange", newVal);
+import type { SelectValue, SelectOption } from "tdesign-vue-next";
+
+function handleBeforeChange(newVal: SelectValue<SelectOption>) {
+  emit("modeChange", String(newVal));
 }
 function updateDuration(newDuration: number) {
   modelParmas.value.duration = newDuration;

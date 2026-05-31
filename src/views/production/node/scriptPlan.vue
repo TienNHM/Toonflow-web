@@ -8,7 +8,7 @@
     </div>
     <div class="content">
       <t-empty v-if="!scriptPlan" style="margin-top: 16px"></t-empty>
-      <MdPreview v-else v-model="scriptPlan" :theme="themeSetting.mode" />
+      <MdPreview v-else v-model="scriptPlan" :theme="resolveMdEditorTheme(themeSetting.mode)" />
     </div>
   </t-card>
 
@@ -26,7 +26,7 @@
     attach="body">
     <MdEditor
       v-model="editContent"
-      :theme="themeSetting.mode"
+      :theme="resolveMdEditorTheme(themeSetting.mode)"
       :toolbars="toolbars"
       :footers="[]"
       style="height: 72vh"
@@ -42,6 +42,7 @@ import { Handle, Position } from "@vue-flow/core";
 import { MdEditor, MdPreview } from "md-editor-v3";
 import type { ToolbarNames } from "md-editor-v3";
 import settingStore from "@/stores/setting";
+import { resolveMdEditorTheme } from "@/utils/mdEditorTheme";
 const { themeSetting } = storeToRefs(settingStore());
 
 const props = defineProps<{

@@ -21,7 +21,7 @@
     </div>
 
     <div class="modeRadioGroup">
-      <t-radio-group v-model="agentUseModeVal" variant="default-filled" @change="(val: string) => updateUseMode(val)">
+      <t-radio-group v-model="agentUseModeVal" variant="default-filled" @change="updateUseMode">
         <t-radio value="0">{{ $t('settings.agent.ordinary') }}</t-radio>
         <t-radio value="1">{{ $t('settings.agent.advanced') }}</t-radio>
       </t-radio-group>
@@ -118,9 +118,10 @@
 
 <script setup lang="ts">
 import modelSelect from "@/components/modelSelect.vue";
+import axios from "@/utils/axios";
 import { agentDeployName, agentDeployDesc } from "@/utils/resolveDeployLocale";
 import { providersLogo, modelProviderRules } from "@/utils/providersLogo";
-import axios from "@/utils/axios";
+import type { RadioValue } from "tdesign-vue-next";
 import settingStore from "@/stores/setting";
 const { isElectron } = storeToRefs(settingStore());
 
@@ -334,9 +335,9 @@ async function getUseModeVal() {
   console.log("%c Line:330 🍑 data", "background:#2eafb0", data);
   agentUseModeVal.value = data;
 }
-async function updateUseMode(val: string) {
+async function updateUseMode(val: RadioValue) {
   await axios.post("/setting/agentDeploy/updateUseMode", {
-    agentUseMode: val,
+    agentUseMode: String(val),
   });
 }
 onMounted(() => {

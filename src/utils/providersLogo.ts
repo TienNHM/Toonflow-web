@@ -9,7 +9,7 @@ const iconModules = import.meta.glob<string>("@/assets/providers/*.{webp,png}", 
 function icon(id: string): string {
   for (const [key, url] of Object.entries(iconModules)) {
     const filename = key.split("/").pop()?.split(".")[0];
-    if (filename === id) return url;
+    if (filename === id) return url as string;
   }
   return "";
 }

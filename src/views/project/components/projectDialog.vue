@@ -190,7 +190,7 @@
                     <t-tab-panel v-for="tab in visualManualTabData" :key="tab.value" :value="tab.value" :label="tab.label">
                       <MdEditor
                         v-model="tab.data"
-                        :theme="themeSetting.mode"
+                        :theme="resolveMdEditorTheme(themeSetting.mode)"
                         :toolbars="promptToolbars"
                         :footers="[]"
                         :placeholder="$t('workbench.project.dialog.promptPlaceholder')"
@@ -261,7 +261,7 @@
                     <t-tab-panel v-for="tab in directorManualTabData" :key="tab.value" :value="tab.value" :label="tab.label">
                       <MdEditor
                         v-model="tab.data"
-                        :theme="themeSetting.mode"
+                        :theme="resolveMdEditorTheme(themeSetting.mode)"
                         :toolbars="promptToolbars"
                         :footers="[]"
                         :placeholder="$t('workbench.project.dialog.promptPlaceholder')"
@@ -289,7 +289,8 @@ const { themeSetting } = storeToRefs(settingStore());
 import type { ToolbarNames } from "md-editor-v3";
 import modelSelect from "@/components/modelSelect.vue";
 import type { TabValue } from "tdesign-vue-next";
-import { DialogPlugin } from "tdesign-vue-next";
+import { useI18n } from "vue-i18n";
+import { resolveMdEditorTheme } from "@/utils/mdEditorTheme";
 
 const { t } = useI18n();
 

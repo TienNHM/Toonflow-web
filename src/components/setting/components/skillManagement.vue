@@ -21,7 +21,7 @@
       </div>
 
       <div v-if="activeEntry" class="previewWrap">
-        <MdPreview :theme="themeSetting.mode" :modelValue="content" :toolbars="[]" preview-only preview-theme="github" code-theme="atom" />
+        <MdPreview :theme="resolveMdEditorTheme(themeSetting.mode)" :modelValue="content" :toolbars="[]" preview-only preview-theme="github" code-theme="atom" />
       </div>
 
       <t-empty v-else :description="$t('setting.skillManagement.selectOnTheLeft')" />
@@ -36,7 +36,7 @@
       :confirm-on-enter="false"
       :on-confirm="onSave"
       :loading="isSaving">
-      <MdEditor :theme="themeSetting.mode" v-model="draft" :toolbars="mdToolbars" preview-theme="github" code-theme="atom" style="height: 72vh" />
+      <MdEditor :theme="resolveMdEditorTheme(themeSetting.mode)" v-model="draft" :toolbars="mdToolbars" preview-theme="github" code-theme="atom" style="height: 72vh" />
     </t-dialog>
   </div>
 </template>
@@ -49,6 +49,7 @@ import settingStore from "@/stores/setting";
 const { themeSetting } = storeToRefs(settingStore());
 import type { TreeNodeModel, TreeNodeValue, TreeOptionData } from "tdesign-vue-next";
 import axios from "@/utils/axios";
+import { resolveMdEditorTheme } from "@/utils/mdEditorTheme";
 
 const mdToolbars: ToolbarNames[] = [
   "bold",

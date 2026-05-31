@@ -122,13 +122,13 @@
           </div>
         </div>
         <div class="versionTime" v-if="formattedUpdateTime">
-          <span class="versionTimeLabel">更新时间</span>
+          <span class="versionTimeLabel">{{ $t("settings.about.updateTimeLabel") }}</span>
           <span class="versionTimeValue">{{ formattedUpdateTime }}</span>
         </div>
 
         <!-- 自定义URL输入 -->
         <div class="customUrl" v-if="showCustomUrl">
-          <t-input v-model="customUpdateUrl" placeholder="输入自定义更新地址" clearable style="margin-bottom: 12px" />
+          <t-input v-model="customUpdateUrl" :placeholder="$t('settings.about.customUpdateUrlPlaceholder')" clearable style="margin-bottom: 12px" />
         </div>
 
         <!-- 更新源选择 -->

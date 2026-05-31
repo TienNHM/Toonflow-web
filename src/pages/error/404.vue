@@ -1,8 +1,8 @@
 <template>
   <div class="notFound" :style="{ height: isElectron ? 'calc(100vh - 32px)' : '100vh' }">
     <span class="title">404</span>
-    <div class="notFoundText">页面不存在</div>
-    <t-button class="notFoundBtn" theme="primary" @click="goHome">返回首页</t-button>
+    <div class="notFoundText">{{ $t("error404.title") }}</div>
+    <t-button class="notFoundBtn" theme="primary" @click="goHome">{{ $t("error404.backHome") }}</t-button>
   </div>
 </template>
 

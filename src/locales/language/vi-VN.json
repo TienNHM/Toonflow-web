@@ -69,6 +69,21 @@
         "saved": "Cài đặt ngôn ngữ đã được lưu"
       }
     },
+    "ui": {
+      "colorMode": "Chế độ màu",
+      "auto": "Tự động",
+      "light": "Sáng",
+      "dark": "Tối",
+      "themeColor": "Màu chủ đề",
+      "fontSize": "Cỡ chữ",
+      "fontXs": "Rất nhỏ",
+      "fontSmaller": "Nhỏ hơn",
+      "fontSmall": "Nhỏ",
+      "fontDefault": "Mặc định",
+      "fontLarge": "Lớn",
+      "fontLarger": "Lớn hơn",
+      "fontXl": "Rất lớn"
+    },
     "vendor": {
       "addVendor": "Thêm nhà cung cấp",
       "noVendor": "Chưa có nhà cung cấp, vui lòng thêm trước",
@@ -433,6 +448,8 @@
       "updateAvailable": "phiên bản mới được tìm thấy",
       "upToDate": "Đã phát hiện phiên bản mới",
       "confirmReinstall": "Sao chép liên kết",
+      "updateTimeLabel": "Thời gian cập nhật",
+      "customUpdateUrlPlaceholder": "Nhập địa chỉ cập nhật tùy chỉnh",
       "reinstallRequired": "Trình duyệt sẽ tự động mở và tải xuống. Nếu nó không mở, hãy mở nó bằng tay.",
       "currentVersion": "Phiên bản hiện tại",
       "latestVersionLabel": "Phiên bản mới nhất",
@@ -558,6 +575,11 @@
       "msg": {
         "saveSuccess": "Đã lưu ánh xạ prompt mô hình",
         "saveFailed": "Lưu thất bại, vui lòng thử lại sau"
+      },
+      "type": {
+        "text": "Văn bản",
+        "image": "Hình ảnh",
+        "video": "Video"
       }
     },
     "skill": {
@@ -1010,7 +1032,9 @@
       "noAudio": "Chưa có âm thanh",
       "batchBingAudio": "Gán âm thanh hàng loạt",
       "textPromptInput": "Prompt văn bản",
-      "textPromptPh": "Nhập prompt văn bản"
+      "textPromptPh": "Nhập prompt văn bản",
+      "promptGenerated": "Đã tạo prompt",
+      "promptNotGenerated": "Chưa tạo prompt"
     },
     "script": {
       "searchPlaceholder": "Tìm kiếm tên kịch bản...",
@@ -1242,6 +1266,7 @@
           "selectedCount": "Đã chọn {count} mục",
           "clearSelection": "Bỏ chọn",
           "selectAll": "Chọn tất cả",
+          "batchDelete": "Xóa hàng loạt",
           "batchGenerateImage": "Tạo ảnh hàng loạt",
           "batchGenerateFailed": "Tạo hàng loạt thất bại",
           "batchGenerateSuccess": "Tạo hàng loạt thành công",
@@ -1272,6 +1297,9 @@
         "workbench": {
           "title": "Bàn làm việc Video"
         }
+      },
+      "editVideo": {
+        "mediaLibraryNamingHint": "Đặt tên tệp video theo số # của nhóm phân cảnh"
       },
       "editImage": {
         "upload": "Tải lên",
@@ -1627,6 +1655,10 @@
       "generateFailed": "Kiểm tra lý do thất bại",
       "selectAll": "Chọn tất cả",
       "selected": "Đã chọn",
+      "videoSelected": "Đã chọn",
+      "storyboardLabel": "Phân cảnh {index}",
+      "audioLabel": "Âm thanh",
+      "audioContentPrefix": "Nội dung âm thanh: ",
       "batchGenerateText": "Tạo các từ nhắc nhở theo đợt",
       "batchGenerateVideo": "Tạo video hàng loạt",
       "importVideo": "Nhập vào bàn chỉnh sửa",
@@ -1669,6 +1701,10 @@
       "modeChange": "Chuyển chế độ",
       "modeChangeConfirm": "Chuyển chế độ sẽ xóa nội dung hiện tại. Tiếp tục?"
     }
+  },
+  "error404": {
+    "title": "Trang không tồn tại",
+    "backHome": "Về trang chủ"
   },
   "login": {
     "slogan": "Nền tảng sáng tạo phim ngắn thông minh",

@@ -30,7 +30,7 @@
             @click.stop
             @change="(val: boolean) => toggleCheck(track.id, val)" />
           <t-tag class="indexTag" size="small">#{{ index + 1 }}</t-tag>
-          <t-tag class="selectTag" theme="success" size="small" v-if="track.selectVideoId">已选择</t-tag>
+          <t-tag class="selectTag" theme="success" size="small" v-if="track.selectVideoId">{{ $t("workbench.generate.videoSelected") }}</t-tag>
           <!-- 优先展示选中视频的首帧 -->
           <div class="thumbGroup" v-if="track.selectVideoId && getSelectedVideoSrc(track)">
             <img

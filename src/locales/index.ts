@@ -18,7 +18,15 @@ const languageList = [
   { label: "Русский", tips: "Russian", value: "ru-RU" },
 ];
 
-const cachedLocale = useLocalStorage("locale", "zh-CN");
+function resolveInitialLocale(): string {
+  if (typeof navigator !== "undefined") {
+    const lang = navigator.language.toLowerCase();
+    if (lang.startsWith("vi")) return "vi-VN";
+  }
+  return "zh-CN";
+}
+
+const cachedLocale = useLocalStorage("locale", resolveInitialLocale());
 
 const i18n = createI18n({
   legacy: false,

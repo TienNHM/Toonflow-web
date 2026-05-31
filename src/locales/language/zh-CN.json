@@ -79,6 +79,11 @@
       "msg": {
         "saveSuccess": "模型提示词映射已保存",
         "saveFailed": "保存失败，请稍后重试"
+      },
+      "type": {
+        "text": "文本",
+        "image": "图片",
+        "video": "视频"
       }
     },
     "menu": {
@@ -105,6 +110,21 @@
       "msg": {
         "saved": "语言设置已保存"
       }
+    },
+    "ui": {
+      "colorMode": "颜色模式",
+      "auto": "自动",
+      "light": "浅色",
+      "dark": "深色",
+      "themeColor": "主题色",
+      "fontSize": "字体大小",
+      "fontXs": "极小",
+      "fontSmaller": "较小",
+      "fontSmall": "小",
+      "fontDefault": "默认",
+      "fontLarge": "大",
+      "fontLarger": "较大",
+      "fontXl": "极大"
     },
     "vendor": {
       "addVendor": "添加供应商",
@@ -540,7 +560,9 @@
       "noUpdate": "当前已是最新版本",
       "upToDate": "检测到新版本",
       "reinstallRequired": "将自动打开浏览器并下载，如未打开请手动打开",
-      "confirmReinstall": "复制链接"
+      "confirmReinstall": "复制链接",
+      "updateTimeLabel": "更新时间",
+      "customUpdateUrlPlaceholder": "输入自定义更新地址"
     },
     "logout": {
       "warning": "退出登录后，您需要重新登录才能继续使用系统。",
@@ -1003,7 +1025,9 @@
       "cancelGeneration": "取消生成",
       "selectGenerating": "选择正在生成项",
       "noGenerating": "没有正在生成的数据",
-      "checkNumber": "选择数量"
+      "checkNumber": "选择数量",
+      "promptGenerated": "已生成提示词",
+      "promptNotGenerated": "未生成提示词"
     },
     "script": {
       "searchPlaceholder": "搜索剧本名称...",
@@ -1222,7 +1246,8 @@
           "editInfo": "提示词修改",
           "selectedCount": "已选 {count} 项",
           "clearSelection": "取消选择",
-          "selectAll": "全选"
+          "selectAll": "全选",
+          "batchDelete": "批量删除"
         },
         "storyboardTable": {
           "title": "分镜表",
@@ -1243,6 +1268,9 @@
         "workbench": {
           "title": "视频工作台"
         }
+      },
+      "editVideo": {
+        "mediaLibraryNamingHint": "视频素材名字按照分镜台组#号数字命名"
       },
       "editImage": {
         "upload": "上传",
@@ -1599,6 +1627,7 @@
       "generateFailed": "查看失败原因",
       "selectAll": "全选",
       "selected": "已选",
+      "videoSelected": "已选择",
       "batchGenerateText": "批量生成提示词",
       "batchGenerateVideo": "批量生成视频",
       "importVideo": "导入剪辑台",
@@ -1630,6 +1659,9 @@
       "selectVideo": "请勾选需要下载的视频",
       "batchDownloadVideo": "批量下载视频",
       "storyboard": "分镜",
+      "storyboardLabel": "分镜 {index}",
+      "audioLabel": "音频",
+      "audioContentPrefix": "音频内容：",
       "assets": "资产",
       "promptText": "生成视频提示词数据",
       "videoMenu": "生成视频",
@@ -1640,6 +1672,10 @@
       "modeChange": "清空内容",
       "modeChangeConfirm": "切换模式将会清空当前选中的图片和提示词"
     }
+  },
+  "error404": {
+    "title": "页面不存在",
+    "backHome": "返回首页"
   },
   "login": {
     "slogan": "智能短剧创作平台",

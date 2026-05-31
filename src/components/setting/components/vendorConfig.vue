@@ -353,9 +353,7 @@ import { CodeEditor } from "monaco-editor-vue3";
 import { DialogPlugin } from "tdesign-vue-next";
 import axios from "@/utils/axios";
 import { getVendorCodeTemplate } from "@/utils/getVendorCodeTemplate";
-import { useI18n } from "vue-i18n";
 
-const { locale } = useI18n();
 import { providersLogo, modelProviderRules } from "@/utils/providersLogo";
 import { resolveMdEditorTheme } from "@/utils/mdEditorTheme";
 import type { UploadFile } from "tdesign-vue-next";
